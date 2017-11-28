@@ -15,5 +15,10 @@ RSpec.describe 'items API', type: :request do
       expect(json.first["created_at"]).to be_nil
       expect(json.first["updated_at"]).to be_nil
     end
+
+    it 'returns status code 200' do
+      expect(response).to have_http_status(200)
+
+    end
   end
 end
