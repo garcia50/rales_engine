@@ -9,7 +9,10 @@ RSpec.describe 'invoices API', type: :request do
 
     it "returns all invoices" do
       expect(json).to_not be_empty
+      expect(json.length).to eq(10)
       expect(json.first["status"]).to eq(invoices.first["status"])
+      expect(json.first["created_at"]).to be_nil
+      expect(json.first["updated_at"]).to be_nil
     end
 
     it "returns status code 200" do
@@ -24,6 +27,8 @@ RSpec.describe 'invoices API', type: :request do
       it 'returns an invoice' do
         expect(json).to_not be_empty
         expect(json['id']).to eq(invoice_id)
+        expect(json['created_at']).to be_nil
+        expect(json['updated_at']).to be_nil
       end
 
       it 'returns status code 200' do
