@@ -24,7 +24,7 @@ RSpec.describe 'merchants API' do
     merchant = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(merchant["id"]).to eq(id)
+    expect(json["id"]).to eq(merchant_id)
     expect(json['created_at']).to be_nil
     expect(json['updated_at']).to be_nil
   end
