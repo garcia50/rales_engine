@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'invoices items API', type: :request do
+RSpec.describe 'invoice_items API', type: :request do
   let!(:invoice_items) { create_list(:invoice_item, 10) }
   let!(:invoice_item_id) { invoice_items.first.id }
 
@@ -32,7 +32,19 @@ RSpec.describe 'invoices items API', type: :request do
       end
 
       it "returns http status code 200" do
-        # expect(response).to have_http_status(200)
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context "when resouce does not exist" do
+      let!(:invoice_item_id) { 320984203948230 }
+
+      it "returns status code 404" do
+        expect(response).to have_http_status(404)
+      end
+
+      it "returns error message" do
+        expect(response.body).to match(/Couldn't find InvoiceItem/)
       end
     end
   end

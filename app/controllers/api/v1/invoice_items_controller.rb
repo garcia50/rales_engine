@@ -4,6 +4,6 @@ class Api::V1::InvoiceItemsController < ApplicationController
   end
 
   def show
-    json_response(Invoice.find(params[:id]))
+    json_response(InvoiceItem.find(params[:id]))
   end
 end
