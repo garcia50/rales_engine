@@ -14,4 +14,15 @@ RSpec.describe 'transaction API' do
       expect(json.first["created_at"]).to be_nil
       expect(json.first["updated_at"]).to be_nil
    end
+
+  it "can get one transaction by its id" do
+
+    get "/api/v1/transactions/#{transaction_id}"
+
+    expect(response).to be_success
+    expect(json['id']).to eq(transaction_id)
+    expect(json["created_at"]).to be_nil
+    expect(json["updated_at"]).to be_nil
+  end
+
 end
