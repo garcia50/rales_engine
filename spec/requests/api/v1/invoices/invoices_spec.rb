@@ -37,7 +37,7 @@ RSpec.describe 'invoices API', type: :request do
     end
 
     context "when resource does not exist" do
-      let!(:invoice_id) { 1000000000000000 }
+      let!(:invoice_id) { 100 }
 
       it "returns status code 404" do
         expect(response).to have_http_status(404)
