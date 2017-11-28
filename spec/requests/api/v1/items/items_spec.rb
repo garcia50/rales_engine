@@ -8,7 +8,12 @@ RSpec.describe 'items API', type: :request do
     before { get "/api/v1/items" }
 
     it 'returns all items' do
-      
+      expect(json).to_not be_empty
+      expect(json.length).to eq(10)
+      expect(json.first["name"]).to eq(items.first["name"])
+      expect(json.first["description"]).to eq(items.first["description"])
+      expect(json.first["created_at"]).to be_nil
+      expect(json.first["updated_at"]).to be_nil
     end
   end
 end
