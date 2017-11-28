@@ -4,6 +4,6 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def show
-    
+    json_response(Item.find(params[:id]))
   end
 end

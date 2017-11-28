@@ -18,7 +18,33 @@ RSpec.describe 'items API', type: :request do
 
     it 'returns status code 200' do
       expect(response).to have_http_status(200)
+    end
+  end
 
+  describe 'GET /api/v1/items/:id' do
+    before { get "/api/v1/items/#{item_id}" }
+
+    context "when resource exists" do
+      it "returns an item" do
+        expect(json).to_not be_empty
+        expect(json['id']).to eq(item_id)
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context "when resource does not exist" do
+      let(:item_id) { 200 }
+
+      it "returns status code 404" do
+        expect(response).to have_http_status(404)
+      end
+
+      it "returns error message" do
+        expect(response.body).to match(/Couldn't find Item/)
+      end
     end
   end
 end
