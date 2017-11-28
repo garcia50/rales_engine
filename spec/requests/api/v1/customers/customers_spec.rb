@@ -16,4 +16,17 @@ RSpec.describe 'customers API' do
     expect(json.first["created_at"]).to be_nil
     expect(json.first["updated_at"]).to be_nil
   end
-end  
+
+  it "can get one customer by its id" do
+
+    get "/api/v1/customers/#{customer_id}"
+
+    customer = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(json["id"]).to eq(customer_id)
+    expect(json['created_at']).to be_nil
+    expect(json['updated_at']).to be_nil
+  end
+
+end
