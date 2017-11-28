@@ -18,6 +18,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 3.1'
   gem 'pry'
   gem 'rspec-json_expectations'
+  gem 'active_model_serializers', '~> 0.10.0'
 end
 
 group :development do

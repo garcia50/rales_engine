@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :invoice do
-    status ""
+    status { Faker::Hipster.word }
   end
 end
