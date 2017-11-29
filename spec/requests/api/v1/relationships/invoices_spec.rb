@@ -24,16 +24,15 @@ RSpec.describe "Invoice relationships API", type: :request do
        expect(transactions.first["result"]).to eq(transaction_1.result)
     end
 
-  # describe "GET /api/v1/invoices/:id/invoice_items" do
-  #  get "/api/v1/invoices/#{invoice_id}/invoice_items"
-  #
-  #       expect(response).to be_success
-  #
-  #
-  #       invoice_items = JSON.parse(response.body)
-  #       expect(invoice_items.count).to eq(2)
-  #       expect(invoice_items.first["quantity"]).to eq(4)
-  #     end
+  it "GET /api/v1/invoices/:id/invoice_items" do
+    get "/api/v1/invoices/#{invoice_id}/invoice_items"
+
+        expect(response).to be_success
+
+        invoice_items = JSON.parse(response.body)
+        expect(invoice_items.count).to eq(2)
+        expect(invoice_items.first["quantity"]).to eq(4)
+      end
 
   #
   # describe "GET /api/v1/invoices/:id/items" do
