@@ -1,12 +1,7 @@
 require 'csv'
 
 namespace :import do
-  # desc 'rake import for all csv data'
-  # task all: do
-  #   import_namespace.tasks.each do |task|
-  #     Rake::Task[task].invoke
-  #   end
-  # end
+
   desc 'rake import merchants data from csv'
   task merchants: :environment do
     file = "data/merchants.csv"
@@ -26,6 +21,8 @@ namespace :import do
 
       CSV.foreach(file, :headers => true) do |row|
         Invoice.create! ({
+          :customer_id => row[1],
+          :merchant_id => row[2],
           :status => row[3],
           :created_at => row[4],
           :updated_at => row[5]
@@ -84,7 +81,7 @@ namespace :import do
       file = "data/invoice_items.csv"
 
       CSV.foreach(file, :headers => true) do |row|
-        Invoice_item.create! ({
+        InvoiceItem.create! ({
           :item_id => row[1],
           :invoice_id => row[2],
           :quantity => row[3],
@@ -93,5 +90,16 @@ namespace :import do
           :updated_at => row[6]
           })
       end
+    end
+
+    desc 'rake import for all csv data'
+    task all: :environment do
+        Rake::Task[merchants].invoke
+        Rake::Task[items].invoke
+        Rake::Task[invoices].invoke
+        Rake::Task[invoice_items].invoke
+        Rake::Task[transactions].invoke
+        Rake::Task[customers].invoke
+
     end
 end
