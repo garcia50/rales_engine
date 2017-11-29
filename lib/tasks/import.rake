@@ -1,12 +1,7 @@
 require 'csv'
 
 namespace :import do
-  # desc 'rake import for all csv data'
-  # task all: do
-  #   import_namespace.tasks.each do |task|
-  #     Rake::Task[task].invoke
-  #   end
-  # end
+
   desc 'rake import merchants data from csv'
   task merchants: :environment do
     file = "data/merchants.csv"
@@ -93,5 +88,16 @@ namespace :import do
           :updated_at => row[6]
           })
       end
+    end
+
+    desc 'rake import for all csv data'
+    task all: :environment do
+        Rake::Task[merchants].invoke
+        Rake::Task[items].invoke
+        Rake::Task[invoices].invoke
+        Rake::Task[invoice_items].invoke
+        Rake::Task[transactions].invoke
+        Rake::Task[customers].invoke
+
     end
 end
