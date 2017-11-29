@@ -14,28 +14,14 @@ RSpec.describe "Invoice relationships API", type: :request do
   let!(:invoice_items_1) { invoice.invoice_items.create!(quantity: 4, unit_price: 33, item: item) }
   let!(:invoice_items_2) { invoice.invoice_items.create!(quantity: 5, unit_price: 33, item: item )}
 
-  describe 'GET /api/v1/invoices/:id/transactions' do
-    before { get "/api/v1/invoices/#{invoice_id}/transactions"}
+   it 'returns all of a associated transactions' do
+     get "/api/v1/invoices/#{invoice_id}/transactions"
+  
+       expect(response).to be_success
 
-    context "when the invoice exists" do
-      it "returns all of a associated transactions" do
-        expect(json).to_not be_empty
-        expect(json.length).to eq(2)
-        expect(json.first["result"]).to eq(item_1.result)
-      end
-    end
-
-    context "when the merchant does not exist" do
-      let!(:invoice_id) { 1000 }
-
-      it "returns HTTP status code 404" do
-        expect(response).to have_http_status(404)
-      end
-
-      it "returns an error message" do
-        expect(response.body).to match(/Couldn't find Invoice/)
-      end
-    end
+       transactions = JSON.parse(response.body)
+       expect(transactions.count).to eq(2)
+       expect(json.first["result"]).to eq(transaction_1.first["result"])
   end
 
   describe "GET /api/v1/invoices/:id/invoice_items" do
