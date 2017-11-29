@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20171128233640) do
     t.citext "status"
     t.datetime "created_at", precision: 0
     t.datetime "updated_at", precision: 0
+    t.bigint "merchant_id"
+    t.index ["merchant_id"], name: "index_invoices_on_merchant_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -62,4 +64,5 @@ ActiveRecord::Schema.define(version: 20171128233640) do
     t.datetime "updated_at", precision: 0
   end
 
+  add_foreign_key "invoices", "merchants"
 end
