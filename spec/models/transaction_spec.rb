@@ -6,5 +6,6 @@ RSpec.describe Transaction do
   end
 
   context "relationsips" do
+    it { should belong_to(:invoice) }
   end
 end
