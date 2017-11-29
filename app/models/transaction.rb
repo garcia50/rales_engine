@@ -1,5 +1,5 @@
 class Transaction < ApplicationRecord
-    validates :result, presence: :true
+  validates :result, presence: :true
 
-    belongs_to :invoice
+  belongs_to :invoice
 end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "merchant relationships API", type: :request do
+RSpec.describe "Merchant relationships API", type: :request do
   let!(:merchant)    { create(:merchant) }
   let!(:customer)    { create(:customer) }
   let!(:merchant_id) { merchant.id }
