@@ -53,61 +53,13 @@ RSpec.describe "Invoice relationships API", type: :request do
       expect(customers["first_name"]).to eq(invoice.customer.first_name)
     end
 
+    it "GET /api/v1/invoices/:id/merchant" do
+      get "/api/v1/invoices/#{invoice_id}/merchant"
 
-  #
-  # describe "GET /api/v1/invoices/:id/customer" do
-  #   before { get "/api/v1/invoices/#{invoice_id}/customer"}
-  #
-  #   context "when invoice exists" do
-  #     it "returns an associated customer" do
-  #       expect(json).to_not be_empty
-  #       expect(json["id"]).to eq(invoice.customer.id)
-  #       expect(json["first_name"]).to eq(invoice.customer.first_name)
-  #     end
-  #
-  #     it "returns HTTP status code 200" do
-  #       expect(response).to have_http_status(200)
-  #     end
-  #   end
-  #
-  #   context "when invoice does not exist" do
-  #     let!(:invoice_id) { 432 }
-  #
-  #     it "returns HTTP status code 404" do
-  #       expect(response).to have_http_status(404)
-  #     end
-  #
-  #     it "returns ultra robust error message" do
-  #       expect(response.body).to match(/Couldn't find Invoice/)
-  #     end
-  #   end
-  # end
-  #
-  # describe "GET /api/v1/invoices/:id/merchant" do
-  #   before { get "/api/v1/invoices/#{invoice_id}/merchant"}
-  #
-  #   context "when invoice exists" do
-  #     it "returns an associated merchant" do
-  #       expect(json).to_not be_empty
-  #       expect(json["id"]).to eq(invoice.merchant.id)
-  #       expect(json["name"]).to eq(invoice.merchant.name)
-  #     end
-  #
-  #     it "returns HTTP status code 200" do
-  #       expect(response).to have_http_status(200)
-  #     end
-  #   end
-  #
-  #   context "when invoice does not exist" do
-  #     let!(:invoice_id) { 432 }
-  #
-  #     it "returns HTTP status code 404" do
-  #       expect(response).to have_http_status(404)
-  #     end
-  #
-  #     it "returns ultra robust error message" do
-  #       expect(response.body).to match(/Couldn't find Invoice/)
-  #     end
-  #   end
-  # end
+      expect(response).to be_success
+
+      merchants = JSON.parse(response.body)
+      expect(merchants["name"]).to eq(invoice.merchant.name)
+    end
+
 end
