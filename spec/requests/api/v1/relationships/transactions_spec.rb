@@ -8,7 +8,6 @@ RSpec.describe "Transaction relationships API" do
     before { get "/api/v1/transactions/#{transaction_id}/invoice"}
 
     context "when transaction exists" do
-
       it "returns an associated invoice" do
         expect(json).to_not be_empty
         expect(json["id"]).to eq(transaction.invoice.id)
