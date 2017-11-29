@@ -7,7 +7,8 @@ Rails.application.routes.draw do
       end
 
       namespace :customers do
-        get "/:id/invoices", to: 'invoices#index'
+        get "/:id/invoices",     to: 'invoices#index'
+        get "/:id/transactions", to: 'transactions#index'
       end
 
       namespace :transactions do

@@ -4,8 +4,8 @@ RSpec.describe "Customer Relationships API", type: :request do
   let!(:customer)     { create(:customer) }
   let!(:merchant)     { create(:merchant) }
   let!(:customer_id)  { customer.id }
-  let!(:cool_invoice) { customer.invoices.create!(status: 'cool', merchant: merchant) }
-  let!(:meh_invoice)  { customer.invoices.create!(status: 'meh',  merchant: merchant) }
+  let!(:cool_invoice) { customer.invoices.create!(status: 'cool', merchant: merchant, customer: customer) }
+  let!(:meh_invoice)  { customer.invoices.create!(status: 'meh',  merchant: merchant, customer: customer) }
 
   describe 'GET /api/v1/customers/:id/invoices' do
     before { get "/api/v1/customers/#{customer_id}/invoices"}
@@ -34,13 +34,37 @@ RSpec.describe "Customer Relationships API", type: :request do
       end
     end
   end
+
+  describe "GET /api/v1/customers/:id/transactions" do
+    context "when customer exists" do
+      before do
+        customer = create(:customer)
+        invoice  = create(:invoice, customer: customer)
+        invoice.transactions << create_list(:transaction, 5)
+
+        get "/api/v1/customers/#{customer.id}/transactions"
+      end
+
+      it 'returns all of the customers transactions' do
+        expect(json).to_not be_empty
+        expect(json.length).to eq(5)
+      end
+
+      it "returns HTTP status code 200" do
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context "when customer does not exist" do
+      before { get "/api/v1/customers/#{3303}/transactions" }
+
+      it "returns http status code 404" do
+        expect(response).to have_http_status(404)
+      end
+
+      it "returns an error message" do
+        expect(response.body).to match(/Couldn't find Customer/)
+      end
+    end
+  end
 end
-
-#<Invoice id: nil, status: nil, created_at: nil, updated_at: nil, merchant_id: nil, customer_id: nil>
-
-
-# GET /api/v1/customers/:id/invoices
-# returns a collection oassociated invoices
-
-# GET /api/v1/customers/:id/transactions
-# returns a collection oassociated transactions
