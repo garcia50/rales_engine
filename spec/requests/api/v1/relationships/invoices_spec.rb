@@ -42,64 +42,18 @@ RSpec.describe "Invoice relationships API", type: :request do
           items = JSON.parse(response.body)
           expect(items.count).to eq(2)
           expect(items.last["name"]).to eq('flower')
-        end
+    end
 
-  #
-  # describe "GET /api/v1/invoices/:id/items" do
-  #   before{ get "/api/v1/invoices/#{invoice_id}/items" }
-  #
-  #   context "when the invoice exists" do
-  #     it "returns all items" do
-  #       expect(json).to_not be_empty
-  #       expect(json.length).to eq(2)
-  #       expect(json.first["quantity"]).to eq(invoice_items.quantity)
-  #     end
-  #
-  #     it "returns HTTP status code 200" do
-  #       expect(response).to have_http_status(200)
-  #     end
-  #   end
-  #
-  #   context "when the invoice does not exist" do
-  #     let!(:invoice_id) { 2323233 }
-  #
-  #     it "returns HTTP status code 404" do
-  #       expect(response).to have_http_status(404)
-  #     end
-  #
-  #     it "returns an error message" do
-  #       expect(response.body).to match(/Couldn't find Invoice/)
-  #     end
-  #   end
-  # end
-  #
-  # describe "GET /api/v1/invoices/:id/items" do
-  #   before { get "/api/v1/invoices/#{invoice_id}/items" }
-  #
-  #   context "when the invoice exists" do
-  #     it "returns all items" do
-  #       expect(json).to_not be_empty
-  #       expect(json.length).to eq(2)
-  #       expect(json.first["quantity"]).to eq(invoice_items.quantity)
-  #     end
-  #
-  #     it "returns HTTP status code 200" do
-  #       expect(response).to have_http_status(200)
-  #     end
-  #   end
-  #
-  #   context "when the invoice does not exist" do
-  #     let!(:invoice_id) { 2323233 }
-  #
-  #     it "returns HTTP status code 404" do
-  #       expect(response).to have_http_status(404)
-  #     end
-  #
-  #     it "returns an error message" do
-  #       expect(response.body).to match(/Couldn't find Invoice/)
-  #     end
-  #   end
-  # end
+    it "GET /api/v1/invoices/:id/customer" do
+      get "/api/v1/invoices/#{invoice_id}/customer"
+
+      expect(response).to be_success
+
+      customers = JSON.parse(response.body)
+      expect(customers["first_name"]).to eq(invoice.customer.first_name)
+    end
+
+
   #
   # describe "GET /api/v1/invoices/:id/customer" do
   #   before { get "/api/v1/invoices/#{invoice_id}/customer"}
