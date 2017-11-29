@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe "Invoice relationships API", type: :request do
 
   let!(:invoice)    { create(:invoice) }
+  let!(:merchant)    { create(:merchant) }
+  let!(:customer)    { create(:customer) }
   let!(:invoice_id) { invoice.id }
   let!(:item)    { create(:item) }
   let!(:transaction_1) { invoice.transactions.create!(result: "pending" )}
