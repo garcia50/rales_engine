@@ -81,7 +81,7 @@ namespace :import do
       file = "data/invoice_items.csv"
 
       CSV.foreach(file, :headers => true) do |row|
-        Invoice_item.create! ({
+        InvoiceItem.create! ({
           :item_id => row[1],
           :invoice_id => row[2],
           :quantity => row[3],
