@@ -10,5 +10,6 @@ RSpec.describe Invoice, type: :model do
     it { should have_many(:items).through(:invoice_items) }
     it { should belong_to(:merchant) }
     it { should belong_to(:customer) }
+    it { should have_many(:transactions) }
   end
 end
