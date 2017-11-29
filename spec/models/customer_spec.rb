@@ -7,6 +7,7 @@ RSpec.describe Customer do
   end
 
   context "relationships" do
-
+    it { should have_many(:invoices) }
+    it { should have_many(:transactions) }
   end
 end
