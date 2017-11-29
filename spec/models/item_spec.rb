@@ -7,5 +7,8 @@ RSpec.describe Item, type: :model do
   end
 
   context "relationsips" do
+    it { should have_many(:invoice_items) }
+    it { should have_many(:invoices).through(:invoice_items) }
+    it { should belong_to(:merchant) }
   end
 end
