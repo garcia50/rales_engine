@@ -34,6 +34,16 @@ RSpec.describe "Invoice relationships API", type: :request do
         expect(invoice_items.first["quantity"]).to eq(4)
       end
 
+    it "GET /api/v1/invoices/:id/items" do
+      get "/api/v1/invoices/#{invoice_id}/items"
+
+          expect(response).to be_success
+
+          items = JSON.parse(response.body)
+          expect(items.count).to eq(2)
+          expect(items.last["name"]).to eq('flower')
+        end
+
   #
   # describe "GET /api/v1/invoices/:id/items" do
   #   before{ get "/api/v1/invoices/#{invoice_id}/items" }
