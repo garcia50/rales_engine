@@ -4,6 +4,6 @@ class Api::V1::Merchants::RevenueController < ApplicationController
   end
 
   def show
-    json_response(Merchant.total_revenue(params["date"]))
+    render json: Merchant, serializer: TotalRevenueSerializer, scope: { date: params["date"]}
   end
 end

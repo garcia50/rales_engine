@@ -9,8 +9,7 @@ RSpec.describe "Merchant total_revenue_by_date API", type: :request do
 
       get "/api/v1/merchants/revenue?date=#{date}"
 
-      expect(json).to eq(500)
-      # USE SERIALIZER TO MAKE DIS { total_revenue: 500 } TODO
+      expect(json).to eq({"total_revenue"=>"5.0"})
     end
   end
 end
