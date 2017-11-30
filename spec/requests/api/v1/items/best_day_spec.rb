@@ -5,7 +5,7 @@ RSpec.describe 'date with the most invoices sold' do
   it 'returns the date with the most sales for the given item using the invoice date' do
     item = create(:item)
     invoice = create(:invoice, created_at: "2012-03-27 14:53:59")
-     invoice_items = create(:invoice_item, invoice: invoice, created_at: "2012-03-27 14:53:59")
+    invoice_items = create(:invoice_item, invoice: invoice, created_at: "2012-03-27 14:53:59")
 
     allow(Item).to receive(:find).with("1") { item }
     allow(item).to receive(:best_day) { invoice_items }
@@ -16,6 +16,6 @@ RSpec.describe 'date with the most invoices sold' do
 
       day = JSON.parse(response.body)
 
-      expect(day["created_at"]).to eq(invoice_items.created_at)
+      expect(day["created_at"]).to eq("2012-03-27T14:53:59.000Z")
    end
  end
