@@ -35,4 +35,13 @@ class Merchant < ApplicationRecord
       .order('count(invoices.*) desc')
       .first
   end
+
+  def self.most_items_sold(limit=5)
+    select("merchants.id, count(invoice_items.quantity) as quantity")
+    .joins(invoices: [:transactions, :invoice_items])
+    .merge(Transaction.successful)
+    .group(:id)
+    .order("quantity DESC")
+    .limit(limit)
+  end
 end
