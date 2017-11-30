@@ -16,10 +16,11 @@ RSpec.describe 'merchants BI API' do
 
       expect(response).to be_success
 
+
       merchants = JSON.parse(response.body)
+
       expect(merchants.class).to eq(Array)
       expect(merchants.count).to eq(1)
-      expect(merchants.first.name).to eq("Hugh")
    end
 
  end
