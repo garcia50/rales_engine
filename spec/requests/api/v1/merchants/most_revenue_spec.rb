@@ -15,5 +15,3 @@ RSpec.describe "Merchants with most_revenue API" do
     end
   end
 end
-
-# GET /api/v1/merchants/most_revenue?quantity=x returns the top x merchants ranked by total revenue

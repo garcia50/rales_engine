@@ -60,14 +60,5 @@ class Merchant < ApplicationRecord
       .group('merchants.id')
       .order('sum(invoice_items.quantity * invoice_items.unit_price) DESC')
       .take(x)
-
-    # NEEDS
-    # invoices, invoice itmes, transactions -> JOIN EM
-    # merge on succesful transaction
-    # GROUP them on merchants id
-    # order by revenue figure it out
-    # take X
   end
 end
-
-# GET /api/v1/merchants/most_revenue?quantity=x returns the top x merchants ranked by total revenue
