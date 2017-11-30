@@ -12,4 +12,14 @@ class Item < ApplicationRecord
       .order('sum(invoice_items.quantity * invoice_items.unit_price) DESC')
       .take(x)
   end
+
+  def best_day
+    invoices
+    .select('invoices.created_at')
+    .joins(:transactions)
+    .merge(Transaction.successful)
+    .group('invoices.id')
+    .order('sum(invoices.id) DESC')
+    .first
+  end
 end
