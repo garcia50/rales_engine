@@ -15,11 +15,11 @@ class Item < ApplicationRecord
 
   def best_day
     invoices
-    .select('invoices.created_at')
+    .select('invoices.*')
     .joins(:transactions)
     .merge(Transaction.successful)
     .group('invoices.id')
     .order('sum(invoice_items.quantity) DESC')
-    .first
+    .first.created_at
   end
 end
