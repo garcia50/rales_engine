@@ -15,6 +15,16 @@ RSpec.describe "Invoice_items relationships API", type: :request do
 
       expect(invoice["status"]).to eq(invoice_items_1.invoice.status)
    end
+
+   it 'returns associated invoice' do
+     get "/api/v1/invoice_items/#{invoice_item_id}/item"
+
+       expect(response).to be_success
+
+       item = JSON.parse(response.body)
+
+       expect(item["name"]).to eq(invoice_items_1.item.name)
+    end
 end
 
 
