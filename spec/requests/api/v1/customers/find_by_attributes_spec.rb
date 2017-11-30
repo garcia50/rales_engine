@@ -92,7 +92,7 @@ RSpec.describe "user can find item by attribute in params", type: :request do
     expect(response).to be_success
     customers = JSON.parse(response.body)
     expect(customers.class).to eq(Array)
-    expect(customers.count).to eq(3)
+    expect(customers.count).to eq(4)
   end
 
   it "returns all records based on created_at date" do
