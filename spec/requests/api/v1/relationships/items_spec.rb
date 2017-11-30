@@ -13,7 +13,7 @@ RSpec.describe "Item relationships API", type: :request do
       expect(response).to be_success
 
       invoice_items = JSON.parse(response.body)
-      expect(transactions.count).to eq(2)
+      expect(invoice_items.count).to eq(2)
       expect(invoice_items.first["quantity"]).to eq(invoice_items_1.quantity)
    end
 end
