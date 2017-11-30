@@ -61,7 +61,7 @@ class Merchant < ApplicationRecord
       .order('sum(invoice_items.quantity * invoice_items.unit_price) DESC')
       .take(x)
 
-    # NEEDS 
+    # NEEDS
     # invoices, invoice itmes, transactions -> JOIN EM
     # merge on succesful transaction
     # GROUP them on merchants id
