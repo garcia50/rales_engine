@@ -8,9 +8,10 @@ RSpec.describe "Random item", type: :request do
       get '/api/v1/items/random'
 
       expect(json).to_not be_empty
-      # expect(json["id"].class).to eq(Integer)
-      # expect(json["invoice_id"].class).to eq(Integer)
-      # expect(json["item_id"].class).to eq(Integer)
+      expect(json["id"].class).to eq(Integer)
+      expect(json["name"].class).to eq(String)
+      expect(json["description"].class).to eq(String)
+      expect(json["unit_price"].class).to eq(Integer)
     end
   end
 end
