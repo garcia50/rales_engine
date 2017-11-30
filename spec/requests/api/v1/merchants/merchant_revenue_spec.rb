@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'merchants BI API' do
+RSpec.describe 'merchant BI API' do
   let!(:merchant)        { create(:merchant) }
   let!(:merchant_id)     { merchant.id }
   let!(:customer)        { create(:customer) }
