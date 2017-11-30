@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Item relationships API", type: :request do
-  let!(:items)   { create(:item) }
+  let!(:merchant)   { create(:merchant) }
+  let!(:items) { Item.create!(name: "zoey", description: "a dog" , unit_price: 30, merchant_id: merchant.id)}
   let!(:item_id) { items.id }
   let!(:invoice) {create(:invoice)}
   let!(:invoice_items_1) { InvoiceItem.create!(quantity: 4, unit_price: 33, item: items, invoice: invoice) }
@@ -16,6 +17,18 @@ RSpec.describe "Item relationships API", type: :request do
       expect(invoice_items.count).to eq(2)
       expect(invoice_items.first["quantity"]).to eq(invoice_items_1.quantity)
    end
+
+   it 'returns associated merchant' do
+     get "/api/v1/items/#{item_id}/merchant"
+
+       expect(response).to be_success
+
+       merchant = JSON.parse(response.body)
+
+       expect(merchant["name"]).to eq(merchant.name)
+    end
+
+
 end
 
 
