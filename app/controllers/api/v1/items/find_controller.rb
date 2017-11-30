@@ -1,6 +1,6 @@
 class Api::V1::Items::FindController < ApplicationController
   def index
-
+    json_response(Item.where(valid_params))
   end
 
   def show
