@@ -53,4 +53,11 @@ RSpec.describe "user can find invoice item attributes based on search params", t
       expect(json["id"]).to eq(invoice_item.id)
     end
   end
+
+  context "multiple finders" do
+    it "returns array with a single record based on id" do
+      get "/api/v1/invoice_items/find_all?id=#{invoice_item.id}"
+
+    end
+  end
 end
