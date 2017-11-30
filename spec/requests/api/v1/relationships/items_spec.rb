@@ -25,7 +25,7 @@ RSpec.describe "Item relationships API", type: :request do
 
        merchant = JSON.parse(response.body)
 
-       expect(merchant["name"]).to eq(merchant.name)
+       expect(merchant["name"]).to eq(items.merchant.name)
     end
 
 
