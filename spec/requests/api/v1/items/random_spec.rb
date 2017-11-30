@@ -11,7 +11,7 @@ RSpec.describe "Random item", type: :request do
       expect(json["id"].class).to eq(Integer)
       expect(json["name"].class).to eq(String)
       expect(json["description"].class).to eq(String)
-      expect(json["unit_price"].class).to eq(Integer)
+      expect(json["unit_price"].class).to eq(String)
     end
   end
 end

@@ -28,7 +28,7 @@ RSpec.describe "user can find item by attribute in params", type: :request do
       get "/api/v1/items/find?unit_price=#{item.unit_price}"
 
       expect(json).to_not be_empty
-      expect(json["unit_price"]).to eq(item.unit_price)
+      expect(json["unit_price"]).to eq((item.unit_price / 100.0).to_s)
     end
 
     it 'returns a single record based on created_at' do
