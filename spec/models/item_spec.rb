@@ -26,5 +26,26 @@ RSpec.describe Item, type: :model do
         expect(Item.most_revenue(2).last).to eq(item_2)
       end
     end
+
+
+    describe "#best_day" do
+      it "returns the date with the most sales for the given item using the invoice date" do
+        items = create(:item)
+        invoice_1 = create(:invoice, created_at: "2012-03-22T03:55:09.000Z")
+        invoice_2 = create(:invoice, created_at: "2012-03-22T03:55:09.000Z")
+        invoice_3 = create(:invoice, created_at: "2012-03-20T23:57:05.000Z")
+
+
+        create(:invoice_item, item: items, invoice: invoice_1, quantity: 10)
+        create(:invoice_item, item: items, invoice: invoice_2, quantity: 1)
+        create(:invoice_item, item: items, invoice: invoice_3, quantity: 5)
+        create(:transaction,  invoice: invoice_1,   result:  "success")
+        create(:transaction,  invoice: invoice_2,   result:  "success")
+        create(:transaction,  invoice: invoice_3,   result:  "success")
+
+        expect(items.best_day.created_at).to eq(invoice_1.created_at)
+
+      end
+    end
   end
 end

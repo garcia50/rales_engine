@@ -19,7 +19,7 @@ class Item < ApplicationRecord
     .joins(:transactions)
     .merge(Transaction.successful)
     .group('invoices.id')
-    .order('sum(invoices.id) DESC')
+    .order('sum(invoice_items.quantity) DESC')
     .first
   end
 end
