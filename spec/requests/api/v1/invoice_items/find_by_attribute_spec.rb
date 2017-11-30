@@ -73,6 +73,17 @@ RSpec.describe "user can find invoice item attributes based on search params", t
       expect(json.length).to eq(2)
     end
 
+    it "returns multiple records based on item_id" do
+      item           = create(:item)
+      invoice_item_1 = create(:invoice_item, item: item)
+      invoice_item_2 = create(:invoice_item, item: item)
+      get "/api/v1/invoice_items/find_all?item_id=#{invoice_item_1.item_id}"
+
+      expect(json).to_not be_empty
+      expect(json.class).to be(Array)
+      expect(json.length).to eq(2)
+    end
+
     it "returns multiple records based on quantity" do
       invoice_item_1 = create(:invoice_item, quantity: 5)
       invoice_item_2 = create(:invoice_item, quantity: 5)
@@ -83,11 +94,30 @@ RSpec.describe "user can find invoice item attributes based on search params", t
       expect(json.length).to eq(2)
     end
 
-    it "returns multiple records based on item_id" do
-      item           = create(:item)
-      invoice_item_1 = create(:invoice_item, item: item)
-      invoice_item_2 = create(:invoice_item, item: item)
-      get "/api/v1/invoice_items/find_all?item_id=#{invoice_item_1.item_id}"
+    it "returns multiple records based on unit_price" do
+      invoice_item_1 = create(:invoice_item, unit_price: 5)
+      invoice_item_2 = create(:invoice_item, unit_price: 5)
+      get "/api/v1/invoice_items/find_all?unit_price=#{invoice_item_1.unit_price}"
+
+      expect(json).to_not be_empty
+      expect(json.class).to be(Array)
+      expect(json.length).to eq(2)
+    end
+
+    it "returns multiple records based on created_at" do
+      invoice_item_1 = create(:invoice_item, created_at: "Thu, 30 Nov 2017 00:05:02 UTC +00:00")
+      invoice_item_2 = create(:invoice_item, created_at: "Thu, 30 Nov 2017 00:05:02 UTC +00:00")
+      get "/api/v1/invoice_items/find_all?created_at=#{invoice_item_1.created_at}"
+
+      expect(json).to_not be_empty
+      expect(json.class).to be(Array)
+      expect(json.length).to eq(2)
+    end
+
+    it "returns multiple records based on updated_at" do
+      invoice_item_1 = create(:invoice_item, updated_at: "Thu, 30 Nov 2017 00:05:02 UTC +00:00")
+      invoice_item_2 = create(:invoice_item, updated_at: "Thu, 30 Nov 2017 00:05:02 UTC +00:00")
+      get "/api/v1/invoice_items/find_all?updated_at=#{invoice_item_1.updated_at}"
 
       expect(json).to_not be_empty
       expect(json.class).to be(Array)
