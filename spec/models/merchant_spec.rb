@@ -44,6 +44,16 @@ RSpec.describe Merchant, type: :model do
 
         expect(Merchant.most_items_sold(1).first).to eq(merchant_2)
       end
+
+    describe "self.total_revenue(date)" do
+      it " returns the total revenue for date x across all merchants" do
+        date     = "2012-03-16 11:55:05"
+        merchant = create(:merchant)
+        invoices = create_list(:invoice, 5, merchant: merchant, created_at: date)
+        create_transaction(invoices)
+
+        expect(Merchant.total_revenue(date)).to eq(500)
+      end
     end
   end
 end
