@@ -4,8 +4,8 @@ RSpec.describe "Merchant relationships API", type: :request do
   let!(:merchant)    { create(:merchant) }
   let!(:customer)    { create(:customer) }
   let!(:merchant_id) { merchant.id }
-  let!(:item_1)      { merchant.items.create!(name: "cool", description: 'stuff') }
-  let!(:item_2)      { merchant.items.create!(name: "burritos", description: 'aww yea') }
+  let!(:item_1)      { merchant.items.create!(name: "cool", description: 'stuff', unit_price: 200) }
+  let!(:item_2)      { merchant.items.create!(name: "burritos", description: 'aww yea', unit_price: 200) }
   let!(:invoice_1)   { merchant.invoices.create!(status: 'cool', customer: customer) }
   let!(:invoice_2)   { merchant.invoices.create!(status: 'chill', customer: customer) }
 
