@@ -1,5 +1,6 @@
 class Api::V1::InvoiceItems::FindController < ApplicationController
   def index
+    json_response(InvoiceItem.where(valid_params))
   end
 
   def show
