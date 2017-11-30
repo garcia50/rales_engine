@@ -26,6 +26,3 @@ RSpec.describe "Invoice_items relationships API", type: :request do
        expect(item["name"]).to eq(invoice_items_1.item.name)
     end
 end
-
-
-# GET /api/v1/invoice_items/:id/item returns the associated item
