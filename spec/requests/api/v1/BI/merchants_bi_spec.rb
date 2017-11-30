@@ -4,7 +4,7 @@ RSpec.describe 'merchants BI API' do
   let!(:merchant)    { create(:merchant) }
   let!(:merchant_id) { merchant.id }
   let!(:customer)    { create(:customer) }
-  let!(:invoice_1)   { merchant.invoices.create!(status: 'success', customer: customer) }
+  let!(:invoice_1)   { merchant.invoices.create!(status: 'success', customer: customer, created_at: "2012-03-16 11:55:05") }
   let!(:invoice_2)   { merchant.invoices.create!(status: 'success', customer: customer) }
   let!(:transaction_1) { invoice_1.transactions.create!(result: "success" )}
   let!(:transaction_2) { invoice_2.transactions.create!(result: "failed" )}
@@ -22,4 +22,13 @@ RSpec.describe 'merchants BI API' do
       expect(revenue).to eq({"revenue"=>40.0})
       expect(revenue).to_not eq(50)
    end
+
+   it 'returns total revenue for a specific date of a associated merchant' do
+     get "/api/v1/merchants/#{merchant_id}/revenue?date=#{invoice_1.created_at}"
+
+       expect(response).to be_success
+
+       revenue = JSON.parse(response.body)
+       expect(revenue).to eq({"revenue"=>40.0})
+    end
  end
