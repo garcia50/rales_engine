@@ -5,6 +5,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 require 'support/factory_bot.rb'
 require 'support/request_spec_helper.rb'
+require 'support/spec_helper_methods.rb'
 
 ActiveRecord::Migration.maintain_test_schema!
 
@@ -24,6 +25,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
   config.infer_spec_type_from_file_location!
   config.include RequestSpecHelper, type: :request
+  config.include SpecHelperMethods
   config.filter_rails_from_backtrace!
 
   config.before(:each) do
