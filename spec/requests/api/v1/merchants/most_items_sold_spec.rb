@@ -6,6 +6,7 @@ RSpec.describe 'merchants BI API' do
   let!(:customer)        { create(:customer) }
   let!(:invoice_1)       { merchant_1.invoices.create!(status: 'success', customer: customer, created_at: "2012-03-16 11:55:05") }
   let!(:invoice_2)       { merchant_2.invoices.create!(status: 'success', customer: customer) }
+  let!(:transaction)    { create(:transaction, result: 'success')}
   let!(:item_1)          { Item.create!(name: "zoey", description: "a dog" , unit_price: 30, merchant_id: merchant_1.id) }
   let!(:item_2)          { Item.create!(name: "flower", description: "red", unit_price: 50, merchant_id: merchant_2.id) }
   let!(:invoice_items_1) { invoice_1.invoice_items.create!(quantity: 1, unit_price: 1000, item: item_1) }
@@ -15,7 +16,6 @@ RSpec.describe 'merchants BI API' do
     get "/api/v1/merchants/most_items?quantity=1"
 
       expect(response).to be_success
-
 
       merchants = JSON.parse(response.body)
 
