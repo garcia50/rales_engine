@@ -21,7 +21,6 @@ RSpec.describe "user can find item by attribute in params", type: :request do
     it 'returns a single record based on description' do
       get "/api/v1/items/find?description=#{item.description}"
 
-      expect(json).to_not be_empty
       expect(json["description"]).to eq(item.description)
     end
 
