@@ -21,11 +21,10 @@ RSpec.describe Merchant, type: :model do
         cool_customer = create :customer
         weak_customer = create :customer
         invoice_1     = create :invoice, merchant: merchant, customer: cool_customer
-        invoice_2     = create :invoice, merchant: merchant, customer: cool_customer
-        invoice_3     = create :invoice, merchant: merchant, customer: weak_customer
+        invoice_2     = create :invoice, merchant: merchant, customer: weak_customer
 
         create_list(:transaction, 4, result: 'success', invoice: invoice_1)
-        create_list(:transaction, 2, result: 'success', invoice: invoice_3)
+        create_list(:transaction, 2, result: 'success', invoice: invoice_2)
 
         expect(merchant.favorite_customer).to eq(cool_customer)
       end
