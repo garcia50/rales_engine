@@ -32,15 +32,16 @@ RSpec.describe Merchant, type: :model do
 
     describe "self.most_items_sold" do
       it "returns the top x merchants ranked by total quantity generated" do
-        merchant_1 = create :merchant
-        merchant_2 = create :merchant
-        item = create :item
-        invoice_1 = create :invoice, merchant: merchant_1
-        invoice_2 = create :invoice, merchant: merchant_2
-        invoice_items_1 = create :invoice_item, invoice: invoice_1, quantity: 1
-        invoice_items_2 = create :invoice_item, invoice: invoice_2, quantity: 10
-        create(:transaction,  invoice: invoice_1,   result:  "success")
-        create(:transaction,  invoice: invoice_2,   result:  "success")
+        merchant_1      = create :merchant
+        merchant_2      = create :merchant
+        item            = create :item
+        invoice_1       = create :invoice,      merchant: merchant_1
+        invoice_2       = create :invoice,      merchant: merchant_2
+        invoice_items_1 = create :invoice_item, invoice:  invoice_1, quantity: 1
+        invoice_items_2 = create :invoice_item, invoice:  invoice_2, quantity: 10
+
+        create(:transaction, invoice: invoice_1, result: "success")
+        create(:transaction, invoice: invoice_2, result: "success")
 
         expect(Merchant.most_items_sold(1).first).to eq(merchant_2)
       end
@@ -51,9 +52,22 @@ RSpec.describe Merchant, type: :model do
         date     = "2012-03-16 11:55:05"
         merchant = create(:merchant)
         invoices = create_list(:invoice, 5, merchant: merchant, created_at: date)
+
         create_transaction(invoices)
 
         expect(Merchant.total_revenue(date)).to eq(500)
+      end
+    end
+
+    describe "self.most_revenue(x)" do
+      before { setup_merchant_most_revenue_spec() }
+
+      it "returns the top x merchants ranked by total revenue" do
+        merchants = Merchant.most_revenue(2)
+        merch_id  = [ merchants.first.id, merchants.second.id ]
+
+        expect(merchants.class).to eq(Array)
+        expect(merchants.length).to eq(2)
       end
     end
   end

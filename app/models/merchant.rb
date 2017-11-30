@@ -11,14 +11,16 @@ class Merchant < ApplicationRecord
 
   def total_revenue(date = nil)
     if date
-      invoices.joins(:transactions, :invoice_items)
-      .where(invoices: {created_at: "#{date}"})
-      .merge(Transaction.successful)
-      .sum('invoice_items.unit_price * invoice_items.quantity')
+      invoices
+        .joins(:transactions, :invoice_items)
+        .where(invoices: {created_at: "#{date}"})
+        .merge(Transaction.successful)
+        .sum('invoice_items.unit_price * invoice_items.quantity')
     else
-      invoices.joins(:transactions, :invoice_items)
-      .merge(Transaction.successful)
-      .sum('invoice_items.unit_price * invoice_items.quantity')
+      invoices
+        .joins(:transactions, :invoice_items)
+        .merge(Transaction.successful)
+        .sum('invoice_items.unit_price * invoice_items.quantity')
     end
   end
 
@@ -50,10 +52,22 @@ class Merchant < ApplicationRecord
       .merge(Transaction.successful)
       .where('invoices.created_at = ?', date)
       .sum('invoice_items.quantity * invoice_items.unit_price')
-    # NEEDS self, invoices, invoice_items, transactions
-    # Joins -> invoices: [:invoice_items, :transactions]
-    # where invoices created at = date
-    # merge successful transactions
-    # sum invoice_items.quantity * invoice_items.unit_price
+  end
+
+  def self.most_revenue(x)
+    joins(invoices: [:invoice_items, :transactions])
+      .merge(Transaction.successful)
+      .group('merchants.id')
+      .order('sum(invoice_items.quantity * invoice_items.unit_price) DESC')
+      .take(x)
+
+    # NEEDS 
+    # invoices, invoice itmes, transactions -> JOIN EM
+    # merge on succesful transaction
+    # GROUP them on merchants id
+    # order by revenue figure it out
+    # take X
   end
 end
+
+# GET /api/v1/merchants/most_revenue?quantity=x returns the top x merchants ranked by total revenue
