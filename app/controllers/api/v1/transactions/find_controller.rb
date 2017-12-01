@@ -11,7 +11,7 @@ class Api::V1::Transactions::FindController < ApplicationController
   private
 
   def valid_params
-    params.permit(:id, :result, :invoice_id, :created_at, :updated_at)
+    params.permit(:id, :result, :invoice_id, :created_at, :updated_at, :credit_card_number)
   end
 
 end

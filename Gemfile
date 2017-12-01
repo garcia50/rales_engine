@@ -18,10 +18,12 @@ group :development, :test do
   gem 'pry'
   gem 'rspec-json_expectations'
   gem 'active_model_serializers', '~> 0.10.0'
+
 end
 
 group :test do
   gem 'database_cleaner'
+  gem 'simplecov', require: false
 end
 
 group :development do
