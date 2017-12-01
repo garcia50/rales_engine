@@ -10,7 +10,7 @@ RSpec.describe "Random merchant", type: :request do
       expect(response).to be_success
 
       merchant = JSON.parse(response.body)
-      expect(merchant.count).to eq(1)
+      expect(merchant["name"].class).to eq(String)
     end
   end
 end
