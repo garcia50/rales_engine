@@ -1,6 +1,6 @@
 # Rales_Engine
 
-This is a Turing BackEnd Mod 3 project that uses Rails to build JSON API endpoints to expose SalesEngine data. It is a Ruby on Rails application using Ruby 2.4.1, Rails 5 with Active Record, and PostGreSQL database.
+This is a Turing BackEnd Mod 3 project that uses Rails to build JSON API endpoints to expose SalesEngine data. It is a Ruby on Rails application using Ruby 2.4.1, Rails 5 with Active Record, and a PostgreSQL database.
 
 ## How to install
 
