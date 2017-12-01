@@ -10,16 +10,16 @@ class Merchant < ApplicationRecord
 
 
   def total_revenue(date = nil)
-    # THIS METHOD DOES NOT WORK> TODO
-    if date
+    byebug
+    if date != nil
       invoices
         .joins(:transactions, :invoice_items)
-        .where(date)
         .merge(Transaction.successful)
         .sum('invoice_items.unit_price * invoice_items.quantity')
     else
       invoices
         .joins(:transactions, :invoice_items)
+        .where(date)
         .merge(Transaction.successful)
         .sum('invoice_items.unit_price * invoice_items.quantity')
     end
