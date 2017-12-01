@@ -26,7 +26,7 @@ class Merchant < ApplicationRecord
 
   def total_revenue_response
     formatted_revenue = total_revenue/100.0
-    {revenue: formatted_revenue}
+    {revenue: formatted_revenue.to_s}
   end
 
   def favorite_customer
