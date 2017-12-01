@@ -10,6 +10,7 @@ class Merchant < ApplicationRecord
 
 
   def total_revenue(date = nil)
+    # THIS METHOD DOES NOT WORK> TODO
     if date
       invoices
         .joins(:transactions, :invoice_items)
