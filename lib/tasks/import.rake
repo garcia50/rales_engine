@@ -91,5 +91,5 @@ namespace :import do
           })
       end
     end
-      task all: [:customers, :merchants, :invoices, :items, :invoice_items, :transactions]
-  end
+  task all: [:customers, :merchants, :invoices, :items, :invoice_items, :transactions]
+end
