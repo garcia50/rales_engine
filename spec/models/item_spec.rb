@@ -37,7 +37,7 @@ RSpec.describe Item, type: :model do
         create(:invoice_item, item:    item_2,    invoice: invoice, quantity: 1)
         create(:transaction,  invoice: invoice,   result:  "success")
 
-        expect(Item.most_quantity(1).first).to eq(item_1)
+        expect(Item.most_items(1).first).to eq(item_1)
       end
     end
 
