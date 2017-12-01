@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "user can find invoice item attributes based on search params", type: :request do
-  let!(:invoice_item) { create(:invoice_item) }
+  let!(:invoice_item) { create(:invoice_item, unit_price: 300) }
 
   context "single finders" do
     it "returns single invoice item based on primary key" do
@@ -33,7 +33,7 @@ RSpec.describe "user can find invoice item attributes based on search params", t
     end
 
     it "returns single record based on unit_price" do
-      get "/api/v1/invoice_items/find?unit_price=#{invoice_item.unit_price}"
+      get "/api/v1/invoice_items/find?unit_price=3.0"
 
       expect(json).to_not be_empty
     end
@@ -94,9 +94,10 @@ RSpec.describe "user can find invoice item attributes based on search params", t
     end
 
     it "returns multiple records based on unit_price" do
-      invoice_item_1 = create(:invoice_item, unit_price: 5)
-      invoice_item_2 = create(:invoice_item, unit_price: 5)
-      get "/api/v1/invoice_items/find_all?unit_price=#{invoice_item_1.unit_price}"
+      invoice_item_1 = create(:invoice_item, unit_price: 500)
+      invoice_item_2 = create(:invoice_item, unit_price: 500)
+      get "/api/v1/invoice_items/find_all?unit_price=5.0"
+
 
       expect(json).to_not be_empty
       expect(json.class).to be(Array)
