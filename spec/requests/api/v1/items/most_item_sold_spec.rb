@@ -7,7 +7,7 @@ RSpec.describe "Item most_quantity API", type: :request do
 
       allow(Item).to receive(:most_quantity).with("2") { items }
 
-      get '/api/v1/items/most_items?quantity=2'
+      get '/api/v1/items/most_quantity?quantity=2'
 
       expect(json).to be_instance_of(Array)
 
