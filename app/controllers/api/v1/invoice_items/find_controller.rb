@@ -1,10 +1,10 @@
 class Api::V1::InvoiceItems::FindController < ApplicationController
   def index
-    render json: InvoiceItem.delegate_multiple_finder(params,valid_params)
+    render json: delegate_multiple_finder(InvoiceItem, params,valid_params)
   end
 
   def show
-    render json: InvoiceItem.delegate_single_finder(params, valid_params)
+    render json: delegate_single_finder(InvoiceItem, params, valid_params)
   end
 
   private

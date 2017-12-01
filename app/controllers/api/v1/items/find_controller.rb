@@ -1,10 +1,10 @@
 class Api::V1::Items::FindController < ApplicationController
   def index
-    json_response(Item.where(valid_params))
+    render json: delegate_multiple_finder(Item, params,valid_params)
   end
 
   def show
-    json_response(Item.find_by(valid_params))
+    render json: delegate_single_finder(Item, params, valid_params)
   end
 
   private
