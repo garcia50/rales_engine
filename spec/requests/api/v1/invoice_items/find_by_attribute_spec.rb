@@ -98,7 +98,6 @@ RSpec.describe "user can find invoice item attributes based on search params", t
       invoice_item_2 = create(:invoice_item, unit_price: 500)
       get "/api/v1/invoice_items/find_all?unit_price=5.0"
 
-
       expect(json).to_not be_empty
       expect(json.class).to be(Array)
       expect(json.length).to eq(2)
