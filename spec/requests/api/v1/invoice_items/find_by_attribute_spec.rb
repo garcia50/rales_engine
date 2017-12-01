@@ -36,7 +36,6 @@ RSpec.describe "user can find invoice item attributes based on search params", t
       get "/api/v1/invoice_items/find?unit_price=#{invoice_item.unit_price}"
 
       expect(json).to_not be_empty
-      expect(json["unit_price"]).to eq(invoice_item.unit_price)
     end
 
     it "returns single record based on created_at" do
