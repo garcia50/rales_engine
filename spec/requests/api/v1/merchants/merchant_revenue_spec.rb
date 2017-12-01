@@ -19,7 +19,7 @@ RSpec.describe 'merchant BI API' do
       expect(response).to be_success
 
       revenue = JSON.parse(response.body)
-      expect(revenue).to eq({"revenue"=>40.0})
+      expect(revenue).to eq({"revenue"=>"40.0"})
       expect(revenue).to_not eq(50)
    end
 
@@ -29,6 +29,6 @@ RSpec.describe 'merchant BI API' do
        expect(response).to be_success
 
        revenue = JSON.parse(response.body)
-       expect(revenue).to eq({"revenue"=>40.0})
+       expect(revenue).to eq({"revenue"=>"40.0"})
     end
  end
