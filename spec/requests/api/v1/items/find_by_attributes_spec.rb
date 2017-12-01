@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "user can find item by attribute in params", type: :request do
-  let!(:item) { create(:item) }
+  let!(:item) { create(:item, unit_price: 500) }
 
   context "single finders" do
     it "returns single record based on primary key" do
@@ -20,12 +20,12 @@ RSpec.describe "user can find item by attribute in params", type: :request do
 
     it 'returns a single record based on description' do
       get "/api/v1/items/find?description=#{item.description}"
-  
+
       expect(json["description"]).to eq(item.description)
     end
 
     it 'returns a single record based on unit_price' do
-      get "/api/v1/items/find?unit_price=#{item.unit_price}"
+      get "/api/v1/items/find?unit_price=5.0"
 
       expect(json).to_not be_empty
       expect(json["unit_price"]).to eq((item.unit_price / 100.0).to_s)
@@ -84,10 +84,10 @@ RSpec.describe "user can find item by attribute in params", type: :request do
     end
 
     it "returns multiple records based on unit_price" do
-      item_1 = create(:item, unit_price: 2)
-      item_2 = create(:item, unit_price: 2)
+      item_1 = create(:item, unit_price: 200)
+      item_2 = create(:item, unit_price: 200)
 
-      get "/api/v1/items/find_all?unit_price=#{item_1.unit_price}"
+      get "/api/v1/items/find_all?unit_price=2.0"
 
       expect(json).to_not be_empty
       expect(json.class).to be(Array)
