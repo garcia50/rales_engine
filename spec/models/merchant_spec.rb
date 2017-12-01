@@ -61,7 +61,6 @@ RSpec.describe Merchant, type: :model do
 
     describe "self.most_revenue(x)" do
       before { setup_merchant_most_revenue_spec() }
-
       it "returns the top x merchants ranked by total revenue" do
         merchants = Merchant.most_revenue(2)
         merch_id  = [ merchants.first.id, merchants.second.id ]
@@ -72,7 +71,7 @@ RSpec.describe Merchant, type: :model do
     end
 
     describe "customers_with_pending_invoices" do
-      before { configure_customers_with_pending_invoices }
+      before { configure_customers_with_pending_invoices() }
       it "retuns customers with pending invoices" do
         customer_list = Merchant.first.customers_with_pending_invoices
         expect(customer_list.class).to eq(Array)
