@@ -15,7 +15,7 @@ RSpec.describe 'date with the most invoices sold' do
       expect(response).to be_success
 
       day = JSON.parse(response.body)
-
-      expect(day["created_at"]).to eq("2012-03-27T14:53:59.000Z")
+    
+      expect(day["best_day"]["created_at"]).to eq("2012-03-27T14:53:59.000Z")
    end
  end

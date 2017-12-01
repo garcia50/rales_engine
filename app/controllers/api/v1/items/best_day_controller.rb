@@ -1,6 +1,6 @@
 class Api::V1::Items::BestDayController < ApplicationController
   def show
-  
-    json_response(Item.find(params[:id]).best_day)
+    render json: Item.find(params[:id]), serializer: BestDaySerializer
+
   end
 end

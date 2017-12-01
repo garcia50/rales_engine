@@ -22,4 +22,7 @@ class Item < ApplicationRecord
     .order('sum(invoice_items.quantity) DESC')
     .first.created_at
   end
+
+
+
 end
