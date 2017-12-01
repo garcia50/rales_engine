@@ -2,16 +2,17 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
       namespace :merchants do
-        get "/find",                  to: "find#show"
-        get "/find_all",              to: "find#index"
-        get "/revenue",               to: "revenue#show"
-        get '/most_revenue',          to: 'most_revenue#index'
-        get "/:id/items",             to: 'items#index'
-        get "/:id/invoices",          to: 'invoices#index'
-        get "/:id/revenue",           to: 'revenue#index'
-        get "/:id/favorite_customer", to: 'customers#show'
-        get "/most_items",            to: 'most_items#index'
-        end
+        get "/find",                               to: "find#show"
+        get "/find_all",                           to: "find#index"
+        get "/revenue",                            to: "revenue#show"
+        get '/most_revenue',                       to: 'most_revenue#index'
+        get "/:id/items",                          to: 'items#index'
+        get "/:id/invoices",                       to: 'invoices#index'
+        get "/:id/revenue",                        to: 'revenue#index'
+        get "/most_items",                         to: 'most_items#index'
+        get "/:id/favorite_customer",              to: 'customers#show'
+        get ':id/customers_with_pending_invoices', to: 'customers#index'
+      end
 
       namespace :customers do
         get "/find",                  to: "find#show"
