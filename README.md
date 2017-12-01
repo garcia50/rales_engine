@@ -13,17 +13,9 @@ git clone: `https://github.com/hmorri32/rales_engine.git`
 Run `$ bundle`
 
 #### Three:
-Check inside the data directory and make sure you have the following csv files
-
-CSV files: customers.csv, invoice_items.csv, invoices.csv, items.csv, merchants.csv, transactions.csv.
-
-If you do not, visit here and load in the files: `https://github.com/turingschool-examples/sales_engine/tree/master/data`
-
-#### Four:
 Setup up database
 
 `rake db:create db:migrate`
-
 
 If you run into an error about citext, run the following commands:
   1. Run the your database -> `$ psql`
@@ -31,7 +23,7 @@ If you run into an error about citext, run the following commands:
   3. `CREATE EXTENSION citext;`
 
 
-#### Five:
+#### Four:
  Run rake import to pull all of the CSV files into the database.
  Run the following commands from the terminal:
 
@@ -39,14 +31,14 @@ If you run into an error about citext, run the following commands:
 
  To load one file at a time: `Rake import: 'filename', eg: Rake import: merchants`
 
-#### Six:
+#### Five:
 Run `rspec`
 
 make sure all the tests pass. If not, you might be missing a gem or maybe you should go back and run
 
 `rails db:test:prepare`
 
-#### Seven:
+#### Six:
 To start the sever run `rails s`
 
 ## Endpoints
