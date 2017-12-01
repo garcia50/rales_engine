@@ -70,5 +70,14 @@ RSpec.describe Merchant, type: :model do
         expect(merchants.length).to eq(2)
       end
     end
+
+    describe "customers_with_pending_invoices" do
+      before { configure_customers_with_pending_invoices }
+      it "retuns customers with pending invoices" do
+        customer_list = Merchant.first.customers_with_pending_invoices
+        expect(customer_list.class).to eq(Array)
+        expect(customer_list.length).to eq(2)
+      end
+    end
   end
 end
