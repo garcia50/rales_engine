@@ -91,15 +91,5 @@ namespace :import do
           })
       end
     end
-
-    desc 'rake import for all csv data'
-    task all: :environment do
-        Rake::Task[merchants].invoke
-        Rake::Task[items].invoke
-        Rake::Task[invoices].invoke
-        Rake::Task[invoice_items].invoke
-        Rake::Task[transactions].invoke
-        Rake::Task[customers].invoke
-
-    end
-end
+      task all: [:customers, :merchants, :invoices, :items, :invoice_items, :transactions]
+  end
