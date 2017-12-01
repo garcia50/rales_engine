@@ -27,6 +27,20 @@ RSpec.describe Item, type: :model do
       end
     end
 
+    describe "self.most_quantity" do
+      it "returns the top x items ranked by total quantity sold" do
+        item_1 = create(:item)
+        item_2 = create(:item)
+        invoice = create(:invoice)
+
+        create(:invoice_item, item:    item_1, invoice: invoice, quantity: 1000)
+        create(:invoice_item, item:    item_2,    invoice: invoice, quantity: 1)
+        create(:transaction,  invoice: invoice,   result:  "success")
+
+        expect(Item.most_quantity(1).first).to eq(item_1)
+      end
+    end
+
 
     describe "#best_day" do
       it "returns the date with the most sales for the given item using the invoice date" do
