@@ -19,11 +19,7 @@ RSpec.describe 'merchant BI API' do
       expect(response).to be_success
 
       revenue = JSON.parse(response.body)
-<<<<<<< HEAD
-      expect(revenue).to eq({"revenue"=>"40.0"})
-=======
       expect(revenue).to eq({"revenue"=> "40.0"})
->>>>>>> fixed failing tests
       expect(revenue).to_not eq(50)
    end
 
@@ -33,10 +29,6 @@ RSpec.describe 'merchant BI API' do
        expect(response).to be_success
 
        revenue = JSON.parse(response.body)
-<<<<<<< HEAD
-       expect(revenue).to eq({"revenue"=>"40.0"})
-=======
        expect(revenue).to eq({"revenue"=> "40.0"})
->>>>>>> fixed failing tests
     end
  end
