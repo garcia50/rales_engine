@@ -10,36 +10,30 @@ git clone: `https://github.com/hmorri32/rales_engine.git`
 `cd rales_engine`
 
 #### Two:
-Run `$ bundle`
+CLI -> `bundle`
 
 #### Three:
-Setup up database
-
 `rake db:create db:migrate`
 
 If you run into an error about citext, run the following commands:
-  1. Run the your database -> `$ psql`
-  2. Connect to DB `\c into the development database -> \c 'rales_engine_development'`
-  3. `CREATE EXTENSION citext;`
-
+  1. Run the your database -> `psql`
+  2. Then, in the psql cli type: `\c 'rales_engine_development'`
+  3. Then `CREATE EXTENSION citext;`
+  4. `\q` to exit the psql cli
 
 #### Four:
- Run rake import to pull all of the CSV files into the database.
- Run the following commands from the terminal:
+ Pull all of the CSV files into the database.
+ Run the following command from the terminal:
 
  To load all: `Rake import: all`
 
- To load one file at a time: `Rake import: 'filename', eg: Rake import: merchants`
-
 #### Five:
-Run `rspec`
-
-make sure all the tests pass. If not, you might be missing a gem or maybe you should go back and run
-
-`rails db:test:prepare`
+test.
+`$ rails db:test:prepare`
+`$ rspec`
 
 #### Six:
-To start the sever run `rails s`
+To start the sever run: `rails s`
 
 ## Endpoints
 
